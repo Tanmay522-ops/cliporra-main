@@ -1,0 +1,14 @@
+{
+  "name": "cliporra",
+  "private": true,
+  "workspaces": [
+    "web",
+    "desktop",
+    "server"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=web",
+    "dev:desktop": "npm run dev --workspace=desktop",
+    "dev:server": "npm run dev --workspace=server"
+  }
+}
