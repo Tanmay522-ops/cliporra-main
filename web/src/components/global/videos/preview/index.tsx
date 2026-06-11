@@ -12,6 +12,7 @@ import TabMenu from '../../Tabs'
 import AiTools from '../../ai-tools'
 import VideoTranscript from '../../video-transcript'
 import Activities from '../../activities'
+import EditVideo from '../edit'
 
 type Props = {
     videoId: string
@@ -19,7 +20,7 @@ type Props = {
 
 const VideoPreview = ({ videoId }: Props) => {
     const router = useRouter()
-    const [retryCount, setRetryCount] = useState(0) 
+    const [retryCount, setRetryCount] = useState(0)
     const { data } = useQueryData(
         ['preview-video'],
         () => getPreviewVideo(videoId)
@@ -41,9 +42,9 @@ const VideoPreview = ({ videoId }: Props) => {
 
     if (status !== 200) router.push("/")
 
- const daysAgo = Math.floor(
-    (new Date().getTime() - new Date(video.createdAt).getTime()) / (24 * 60 * 60 * 1000)
-)
+    const daysAgo = Math.floor(
+        (new Date().getTime() - new Date(video.createdAt).getTime()) / (24 * 60 * 60 * 1000)
+    )
 
     return (
         <div className="grid grid-cols-1 xl:grid-cols-3 lg:px-20 lg:py-10 overflow-y-auto gap-5">
@@ -51,15 +52,15 @@ const VideoPreview = ({ videoId }: Props) => {
                 <div>
                     <div className="flex gap-x-5 items-start justify-between">
                         <h2 className="text-white text-4xl font-bold">{video.title}</h2>
-                        {/* {author ? (
-            <EditVideo
-              videoId={videoId}
-              title={video.title as string}
-              description={video.description as string}
-            />
-          ) : (
-            <></>
-          )} */}
+                        {author ? (
+                            <EditVideo
+                                videoId={videoId}
+                                title={video.title as string}
+                                description={video.description as string}
+                            />
+                        ) : (
+                            <></>
+                        )}
                     </div>
                     <span className="flex gap-x-3 mt-2">
                         <p className="text-[#9D9D9D] capitalize">
@@ -85,20 +86,18 @@ const VideoPreview = ({ videoId }: Props) => {
                         src={`${process.env.NEXT_PUBLIC_CLOUD_FRONT_STREAM_URL}/${video.source}#t=1`}
                     />
                 </video>
-                <div className="flex gap-x-5 items-center justify-between">
-                    <div>
-                        <p className="text-[#BDBDBD] text-semibold">Description</p>
-                        {/* {author ? (
-      <EditVideo
-        videoId={videoId}
-        title={video.title as string}
-        description={video.description as string}
-      />
-    ) : (
-      <></>
-    )} */}
+                <div className="flex flex-col gap-y-2">
+                    <div className="flex items-center gap-x-3">
+                        <p className="text-[#BDBDBD] font-semibold">Description</p>
+                        {author && (
+                            <EditVideo
+                                videoId={videoId}
+                                title={video.title as string}
+                                description={video.description as string}
+                            />
+                        )}
                     </div>
-                    <p className="text-[#9D9D9D] text-lg text-medium">
+                    <p className="text-[#9D9D9D] text-lg">
                         {video.description}
                     </p>
                 </div>
@@ -116,19 +115,19 @@ const VideoPreview = ({ videoId }: Props) => {
                         source={video.source}
                         title={video.title as string}
                     />
-                <Download className="text-[#4d4c4c]"/>
+                    <Download className="text-[#4d4c4c]" />
                 </div>
                 <div>
                     <TabMenu defaultValue="Ai tools"
-                    triggers={['Ai tools',"Transcript",'Activity']}
+                        triggers={['Ai tools', "Transcript", 'Activity']}
                     >
                         <AiTools
-                        videoId={videoId}
-                         trial={video.User?.trial!}
-                         plan={video.User?.subscription?.plan!}
-                         />
-                         <VideoTranscript transcript={video.description!} />
-                         <Activities author={video.User?.firstname as string} videoId={videoId} />
+                            videoId={videoId}
+                            trial={video.User?.trial!}
+                            plan={video.User?.subscription?.plan!}
+                        />
+                        <VideoTranscript transcript={video.summery!} />
+                        <Activities author={video.User?.firstname as string} videoId={videoId} />
                     </TabMenu>
                 </div>
             </div>
