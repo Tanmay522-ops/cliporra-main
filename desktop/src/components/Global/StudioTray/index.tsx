@@ -31,7 +31,7 @@ const StudioTray = () => {
         setOnSources(payload)
     })
 
-    const videoElement = useRef<HTMLVideoElement | null>(null)
+    const videoElement = useRef<HTMLVideoElement>(null!)
 
 
     useEffect(() => {

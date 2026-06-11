@@ -3,7 +3,7 @@ import { getPreviewVideo, sendEmailForFirstView } from '@/actions/workspace'
 import { useQueryData } from '@/hooks/useQueryData'
 import { VideoProps } from '@/types/index.type'
 import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import CopyLink from '../copy-link'
 import RichLink from '../rich-link'
 import { truncateString } from '@/lib/utils'
@@ -19,7 +19,7 @@ type Props = {
 
 const VideoPreview = ({ videoId }: Props) => {
     const router = useRouter()
-
+    const [retryCount, setRetryCount] = useState(0) 
     const { data } = useQueryData(
         ['preview-video'],
         () => getPreviewVideo(videoId)
@@ -41,9 +41,9 @@ const VideoPreview = ({ videoId }: Props) => {
 
     if (status !== 200) router.push("/")
 
-    const daysAgo = Math.floor(
-        (new Date().getTime() - video.createdAt.getTime()) / (24 * 60 * 60 * 1000)
-    )
+ const daysAgo = Math.floor(
+    (new Date().getTime() - new Date(video.createdAt).getTime()) / (24 * 60 * 60 * 1000)
+)
 
     return (
         <div className="grid grid-cols-1 xl:grid-cols-3 lg:px-20 lg:py-10 overflow-y-auto gap-5">
@@ -74,9 +74,15 @@ const VideoPreview = ({ videoId }: Props) => {
                     preload="metadata"
                     className="w-full aspect-video opacity-50 rounded-xl"
                     controls
+                    key={retryCount}  // ← add this
+                    onError={() => {  // ← add this
+                        if (retryCount < 3) {
+                            setTimeout(() => setRetryCount(c => c + 1), 2000)
+                        }
+                    }}
                 >
                     <source
-                        src={`${process.env.NEXT_PUBLIC_CLOUD_FRONT_STREAM_URL}/${video.source}#1`}
+                        src={`${process.env.NEXT_PUBLIC_CLOUD_FRONT_STREAM_URL}/${video.source}#t=1`}
                     />
                 </video>
                 <div className="flex gap-x-5 items-center justify-between">

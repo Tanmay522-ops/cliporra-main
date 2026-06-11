@@ -4,7 +4,7 @@ import io from "socket.io-client"
 
 let videoTransferFileName: string | undefined
 let mediaRecorder: MediaRecorder | undefined
-let userId: String
+let userId: string
 
 const socket = io(import.meta.env.VITE_SOCKET_URL as string)
 
@@ -18,7 +18,10 @@ export const StartRecording = (onScourses: {
     mediaRecorder?.start(1000)
 }
 
-export const onStopRecording = () => mediaRecorder?.stop()
+export const onStopRecording = () => {
+    mediaRecorder?.stop()
+    mediaRecorder?.stream.getTracks().forEach(track => track.stop())
+}
 
 const stopRecording = () => {
     hidePluginWindow(false)
@@ -26,9 +29,12 @@ const stopRecording = () => {
         filename: videoTransferFileName,
         userId,
     })
+    videoTransferFileName = undefined
+    mediaRecorder = undefined
 }
 
 export const onDataAvailable = (e: BlobEvent) => {
+    if (!videoTransferFileName) return // guard against stray chunks
     socket.emit('video-chunks', {
         chunks: e.data,
         filename: videoTransferFileName,
@@ -62,10 +68,8 @@ export const selectSources = async (
 
         userId = onSources.id
 
-        // Creating the stream
         const stream = await navigator.mediaDevices.getUserMedia(constraints)
 
-        // audio & webcam stream
         const audioStream = await navigator.mediaDevices.getUserMedia({
             video: false,
             audio: onSources?.audio
@@ -88,6 +92,6 @@ export const selectSources = async (
         })
 
         mediaRecorder.ondataavailable = onDataAvailable
-        mediaRecorder.onstop = stopRecording 
+        mediaRecorder.onstop = stopRecording
     }
 }
