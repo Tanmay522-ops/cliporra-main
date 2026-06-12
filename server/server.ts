@@ -7,9 +7,15 @@ import fs from "fs"
 import { Readable } from "stream"
 import axios from "axios"
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
+import OpenAI from "openai"
 dotenv.config()
 
 const app = express()
+
+
+// const openai = new OpenAI({
+//   apiKey: process.env.OPEN_AI_KEY
+// })
 
 const s3 = new S3Client({
   credentials: {
@@ -82,6 +88,46 @@ io.on("connection", (socket) => {
 
         if (fileStatus['$metadata'].httpStatusCode === 200) {
           console.log('🟢 Video Uploaded To AWS')
+
+          // if (processing.data.plan === 'PRO') {
+          //   fs.stat('temp_upload/' + data.filename, async (err, stat) => {
+          //     if (!err) {
+          //       if (stat.size < 25000000) {
+          //         const transcription = await openai.audio.transcriptions.create({
+          //           file: fs.createReadStream(`temp_upload/${data.filename}`),
+          //           model: 'whisper-1',
+          //           response_format: 'text',
+          //         })
+
+          //         if (transcription) {
+          //           const completion = await openai.chat.completions.create({
+          //             model: 'gpt-3.5-turbo',
+          //             response_format: { type: 'json_object' },
+          //             messages: [
+          //               {
+          //                 role: 'system',
+          //                 content: `You are going to generate a title and a nice description using the speech to text transcription provided: transcription(${transcription}) and then return it in json format as {"title": <the title you gave>, "summary": <the summary you created>}`,
+          //               },
+          //             ],
+          //           })
+
+          //           const titleAndSummaryGenerated = await axios.post(
+          //             `${process.env.NEXT_API_HOST}recording/${data.userId}/transcribe`,
+          //             {
+          //               filename: data.filename,
+          //               content: completion.choices[0].message.content,
+          //               transcript: transcription,
+          //             }
+          //           )
+
+          //           if (titleAndSummaryGenerated.data.status !== 200) {
+          //             console.log('🔴 Error: Something went wrong when creating the title and description')
+          //           }
+          //         }
+          //       }
+          //     }
+          //   })
+          // }
 
           try {
             await axios.get(`${process.env.CLOUD_FRONT_STREAM_URL}/${data.filename}`)

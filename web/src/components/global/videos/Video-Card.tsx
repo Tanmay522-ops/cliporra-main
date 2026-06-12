@@ -1,8 +1,6 @@
-import React from 'react'
+"use client"
 import CardMenu from './video-card-menu'
 import Loader from '../loader'
-import ChangeVideoLocation from '../forms/change-video-location'
-import { Copse } from 'next/font/google'
 import CopyLink from './copy-link'
 import Link from 'next/link'
 import { Dot, Share2, User } from 'lucide-react'
