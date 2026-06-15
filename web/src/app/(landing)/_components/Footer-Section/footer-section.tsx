@@ -2,6 +2,7 @@
 
 import { GitHubLogoIcon, LinkedInLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons"
 import { MessageCircle, Monitor } from "lucide-react"
+import Image from "next/image"
 
 export default function Footer() {
     return (
@@ -13,7 +14,12 @@ export default function Footer() {
                     <div className="md:col-span-1 col-span-2">
                         <div className="flex items-center gap-2.5 mb-5">
                             <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                                <Monitor className="w-4 h-4 text-black" />
+                                <Image
+                                    src="/cliporra-logo.svg"
+                                    height={40}
+                                    width={40}
+                                    alt="logo"
+                                />
                             </div>
                             <span className="text-lg font-medium">Cliporra</span>
                         </div>
