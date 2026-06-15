@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { ClerkProvider } from "@clerk/nextjs"
-import { Manrope } from "next/font/google"
+import { Manrope, Instrument_Serif } from "next/font/google"
 
 import "./globals.css"
 
@@ -18,6 +18,12 @@ export const metadata: Metadata = {
   description: "Share AI powered videos with your friends",
 }
 
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-instrument-serif",
+})
+
 export default function RootLayout({
   children,
 }: {
@@ -26,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${manrope.className} bg-background text-foreground`}
+        className={`${manrope.className} ${instrumentSerif.variable} bg-background text-foreground`}
       >
         <ClerkProvider>
           <ThemeProvider
