@@ -9,8 +9,23 @@ import CtaSection from "./(landing)/_components/Cta-section/cta-section";
 import CardSection from "./(landing)/_components/card-section/card-section";
 import { BlogSection } from "./(landing)/_components/Blog-section/blog-section";
 import FooterSection from "./(landing)/_components/Footer-Section/footer-section";
+import { useAuth } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-export default function SpotlightPreview() {
+
+export default function CliporraPreview() {
+
+    const { isSignedIn, isLoaded } = useAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (isLoaded && isSignedIn) {
+            router.push("/callback");
+        }
+    }, [isLoaded, isSignedIn, router]);
+
+    if (!isLoaded || isSignedIn) return null;
     return (
         <div className="relative flex w-full min-h-screen flex-col bg-black antialiased">
 
