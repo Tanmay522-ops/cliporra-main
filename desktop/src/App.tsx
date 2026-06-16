@@ -5,11 +5,9 @@ import ControlLayout from './layouts/ControlLayout'
 import AuthButton from './components/Global/AuthButton'
 import Widget from './components/Global/widget'
 
+const client = new QueryClient()
+
 function App() {
-
-  const client = new QueryClient()
-
-
   return (
   <QueryClientProvider client={client}>
     <ControlLayout>
