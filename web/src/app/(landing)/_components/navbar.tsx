@@ -3,9 +3,11 @@
 import React, { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { LucideIcon } from "lucide-react"
+import { Download, LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient"
+import { useRouter } from "next/navigation"
+import { Button } from "@/components/ui/button"
 
 interface NavItem {
     name: string
@@ -21,6 +23,7 @@ interface NavBarProps {
 export default function NavBar({ items, className }: NavBarProps) {
     const [activeTab, setActiveTab] = useState(items[0].name)
     const [isMobile, setIsMobile] = useState(false)
+    const router = useRouter()
 
     useEffect(() => {
         const handleResize = () => {
@@ -91,13 +94,20 @@ export default function NavBar({ items, className }: NavBarProps) {
                     <HoverBorderGradient
                         containerClassName="rounded-full"
                         as="button"
-                        className="bg-black dark:bg-black text-white flex items-center gap-x-2 text-sm px-4 py-1"
+                        className="bg-black dark:bg-black text-white flex items-center gap-x-2 text-sm px-4 py-1 cursor-pointer"
                     >
                         Login
                     </HoverBorderGradient>
                 </Link>
 
+                <Link href="/download">
+                    <Button className="flex items-center gap-2 cursor-pointer">
+                        <Download className="w-5 h-5" />
+                        Download Cliporra
+                    </Button>
+                </Link>
             </div>
+
         </div>
     )
 }
