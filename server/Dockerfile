@@ -2,10 +2,10 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY package.json ./
+COPY server/package.json ./
 RUN npm install --include=dev
 
-COPY . .
+COPY server/ .
 RUN npm run build
 
 EXPOSE 5000
