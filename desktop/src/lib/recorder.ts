@@ -6,7 +6,14 @@ let videoTransferFileName: string | undefined
 let mediaRecorder: MediaRecorder | undefined
 let userId: string
 
-const socket = io(import.meta.env.VITE_SOCKET_URL as string)
+const socket = io(import.meta.env.VITE_SOCKET_URL as string, {
+    transports: ['websocket'],
+    reconnection: true,
+})
+
+setInterval(() => {
+    if (socket.connected) socket.emit('ping')
+}, 20000)
 
 export const StartRecording = (onScourses: {
     screen: string
@@ -33,10 +40,11 @@ const stopRecording = () => {
     mediaRecorder = undefined
 }
 
-export const onDataAvailable = (e: BlobEvent) => {
+export const onDataAvailable = async(e: BlobEvent) => {
     if (!videoTransferFileName) return // guard against stray chunks
+    const buffer = await e.data.arrayBuffer()
     socket.emit('video-chunks', {
-        chunks: e.data,
+        chunks: buffer,
         filename: videoTransferFileName,
     })
 }

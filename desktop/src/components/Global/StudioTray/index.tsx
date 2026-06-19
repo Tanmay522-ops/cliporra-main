@@ -26,22 +26,24 @@ const StudioTray = () => {
         setCount(0)
     }
 
-    window.ipcRenderer.on('profile-received', (event, payload) => {
-        console.log(event)
-        setOnSources(payload)
-    })
+    useEffect(() => {
+        const handler = (_event: Electron.IpcRendererEvent, payload: any) => {
+            setOnSources(payload)
+        }
+        window.ipcRenderer.on('profile-received', handler)
+        return () => {
+            window.ipcRenderer.off('profile-received', handler)
+        }
+    }, [])
 
     const videoElement = useRef<HTMLVideoElement>(null!)
 
 
     useEffect(() => {
-        if (onSources && onSources.screen && preview) {
+        if (onSources && onSources.screen) { // remove preview condition
             selectSources(onSources, videoElement)
         }
-        return () => {
-            selectSources(onSources!, videoElement)
-        }
-    }, [onSources, preview]) // 👈 add preview here
+    }, [onSources])
 
     useEffect(() => {
         if (!recording) return
