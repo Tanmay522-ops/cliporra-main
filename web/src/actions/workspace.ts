@@ -307,7 +307,7 @@ export const moveVideoLocation = async (
             },
             data: {
                 folderId: folderId || null,
-                workSpaceId,
+                workspaceId: workSpaceId,
             },
         })
         if (location) return { status: 200, data: 'folder changed successfully' }
