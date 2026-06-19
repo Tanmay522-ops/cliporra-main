@@ -8,7 +8,7 @@ import DownloadButton from './button-download';
 
 type DownloadStatus = "idle" | "downloading" | "downloaded" | "complete"
 
-const VERSION = 'v1.0.1'
+const VERSION = 'v1.0.2'
 const BASE_URL = `https://github.com/Tanmay522-ops/cliporra-main/releases/download/${VERSION}`
 
 
