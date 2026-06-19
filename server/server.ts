@@ -7,10 +7,15 @@ import fs from "fs"
 import { Readable } from "stream"
 import axios from "axios"
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
-import OpenAI from "openai"
+import path from "path"
 dotenv.config()
 
 const app = express()
+
+const tempDir = path.join(process.cwd(), "temp_upload")
+if (!fs.existsSync(tempDir)) {
+  fs.mkdirSync(tempDir, { recursive: true })
+}
 
 
 // const openai = new OpenAI({
@@ -35,6 +40,8 @@ const io = new Server(httpServer, {
     origin: "*",
     methods: ["GET", "POST"],
   },
+  pingTimeout: 60000,
+  pingInterval: 25000,
 })
 
 let recordedChunks: Uint8Array[] = []
@@ -62,6 +69,7 @@ io.on("connection", (socket) => {
   })
 
   socket.on("ping", () => {
+    socket.emit("pong")
   })
 
   socket.on("process-video", async (data) => {
