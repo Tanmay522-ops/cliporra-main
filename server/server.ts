@@ -74,6 +74,7 @@ io.on("connection", (socket) => {
 
   socket.on("process-video", async (data) => {
     console.log("🟢 Processing video..")
+    console.log("🟢 data received:", data.userId, data.filename) 
     recordedChunks = []
 
     await new Promise(resolve => setTimeout(resolve, 1000))
