@@ -28,6 +28,11 @@ export async function POST(
             },
         })
 
+        if (!personalworkspaceId || personalworkspaceId.workspace.length === 0) {
+            console.log('🔴 No user or no personal workspace found for id:', id)
+            return NextResponse.json({ status: 404, message: 'No personal workspace found' })
+        }
+
         const startProcessingVideo = await client.workSpace.update({
             where: {
                 id: personalworkspaceId?.workspace[0].id,
