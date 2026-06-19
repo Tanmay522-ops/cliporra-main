@@ -61,6 +61,9 @@ io.on("connection", (socket) => {
     recordedChunks = []
   })
 
+  socket.on("ping", () => {
+  })
+
   socket.on("process-video", async (data) => {
     console.log("🟢 Processing video..")
     recordedChunks = []
