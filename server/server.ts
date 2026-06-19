@@ -32,7 +32,7 @@ app.use(express.json())
 
 const io = new Server(httpServer, {
   cors: {
-    origin: process.env.ELECTRON_HOST,
+    origin: "*",
     methods: ["GET", "POST"],
   },
 })
@@ -163,6 +163,8 @@ io.on("connection", (socket) => {
   })
 })
 
-httpServer.listen(5000, () => {
-  console.log("🟢 Server is running on port 5000")
+const PORT = process.env.PORT || 5000;
+
+httpServer.listen(PORT, () => {
+  console.log(`🟢 Server is running on port ${PORT}`)
 })
