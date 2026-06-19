@@ -11,8 +11,9 @@ type DownloadStatus = "idle" | "downloading" | "downloaded" | "complete"
 const VERSION = 'v1.0.0'
 const BASE_URL = `https://github.com/Tanmay522-ops/cliporra-main/releases/download/${VERSION}`
 
+
 const DOWNLOAD_LINKS = {
-    windows: `${BASE_URL}/Cliporra-Setup-1.0.0.exe`,
+    windows: `${BASE_URL}/Cliporra.Setup.1.0.0.exe`,
     mac: `${BASE_URL}/Cliporra-1.0.0.dmg`,
     linux: `${BASE_URL}/Cliporra-1.0.0.AppImage`,
 }

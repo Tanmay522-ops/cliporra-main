@@ -41,8 +41,10 @@ const Widget = () => {
 
     useEffect(() => {
         if (user && user.id) {
-            fetchUserProfile(user.id).then((p) => setProfile(p))
-        }   
+            fetchUserProfile(user.id)
+                .then((p) => setProfile(p))
+                .catch((err) => console.error('Profile fetch failed:', err))
+        }
     }, [user])
 
     return (

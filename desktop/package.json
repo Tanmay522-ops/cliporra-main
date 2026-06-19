@@ -1,13 +1,33 @@
 {
   "name": "cliporra-desktop-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "author": "Tanmay",
+  "description": "Cliporra screen recording app",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && electron-builder",
+    "build": "tsc && vite build",
+    "package": "npm run build && electron-builder",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
+  },
+  "build": {
+    "appId": "com.cliporra.app",
+    "productName": "Cliporra",
+    "files": [
+      "dist-renderer/**/*",
+      "dist-electron/**/*",
+      "public/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "public/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false
+    }
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

@@ -1,0 +1,79 @@
+{
+  "_createLucideIcon-BDEuNzrC.js": {
+    "file": "assets/createLucideIcon-BDEuNzrC.js",
+    "name": "createLucideIcon",
+    "imports": [
+      "_index-DpbqXUKy.js"
+    ]
+  },
+  "_index-!~{004}~.js": {
+    "file": "assets/index-Cb-WNPQh.css",
+    "src": "_index-!~{004}~.js"
+  },
+  "_index-DpbqXUKy.js": {
+    "file": "assets/index-DpbqXUKy.js",
+    "name": "index",
+    "css": [
+      "assets/index-Cb-WNPQh.css"
+    ],
+    "assets": [
+      "assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2",
+      "assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2",
+      "assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2",
+      "assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2",
+      "assets/geist-latin-wght-normal-BgDaEnEv.woff2"
+    ]
+  },
+  "index.html": {
+    "file": "assets/main-B_xj9lrJ.js",
+    "name": "main",
+    "src": "index.html",
+    "isEntry": true,
+    "imports": [
+      "_index-DpbqXUKy.js",
+      "_createLucideIcon-BDEuNzrC.js"
+    ],
+    "css": [
+      "assets/main-CrKZYSeS.css"
+    ]
+  },
+  "node_modules/@fontsource-variable/geist/files/geist-cyrillic-ext-wght-normal.woff2": {
+    "file": "assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2",
+    "src": "node_modules/@fontsource-variable/geist/files/geist-cyrillic-ext-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/geist/files/geist-cyrillic-wght-normal.woff2": {
+    "file": "assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2",
+    "src": "node_modules/@fontsource-variable/geist/files/geist-cyrillic-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/geist/files/geist-latin-ext-wght-normal.woff2": {
+    "file": "assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2",
+    "src": "node_modules/@fontsource-variable/geist/files/geist-latin-ext-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2": {
+    "file": "assets/geist-latin-wght-normal-BgDaEnEv.woff2",
+    "src": "node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/geist/files/geist-vietnamese-wght-normal.woff2": {
+    "file": "assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2",
+    "src": "node_modules/@fontsource-variable/geist/files/geist-vietnamese-wght-normal.woff2"
+  },
+  "studio.html": {
+    "file": "assets/studio_main-DX596mUl.js",
+    "name": "studio_main",
+    "src": "studio.html",
+    "isEntry": true,
+    "imports": [
+      "_index-DpbqXUKy.js",
+      "_createLucideIcon-BDEuNzrC.js"
+    ]
+  },
+  "webcam.html": {
+    "file": "assets/web_cam_main-CJxJPbSS.js",
+    "name": "web_cam_main",
+    "src": "webcam.html",
+    "isEntry": true,
+    "imports": [
+      "_index-DpbqXUKy.js"
+    ]
+  }
+}

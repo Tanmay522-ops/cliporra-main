@@ -11,7 +11,7 @@ export default defineConfig({
   build:{
     emptyOutDir: false,
     manifest: true,
-    outDir: 'dist',
+    outDir: 'dist-renderer',
     rollupOptions: {
       input:{
         main: resolve(__dirname, "index.html"),

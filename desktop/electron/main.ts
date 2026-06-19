@@ -1,6 +1,7 @@
 import { app, BrowserWindow, desktopCapturer, ipcMain } from 'electron'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
+import fs from 'node:fs'
 
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -16,10 +17,15 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // │
 process.env.APP_ROOT = path.join(__dirname, '..')
 
+const logPath = path.join(app.getPath('userData'), 'debug.log')
+process.on('uncaughtException', (err) => {
+  fs.appendFileSync(logPath, `${new Date().toISOString()} - ${err.message}\n${err.stack}\n`)
+})
+
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 export const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL']
 export const MAIN_DIST = path.join(process.env.APP_ROOT, 'dist-electron')
-export const RENDERER_DIST = path.join(process.env.APP_ROOT, 'dist')
+export const RENDERER_DIST = path.join(process.env.APP_ROOT, 'dist-renderer')
 
 process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, 'public') : RENDERER_DIST
 
@@ -37,8 +43,8 @@ function createWindow() {
     frame: false,
     transparent: true,
     alwaysOnTop: true,
-    focusable: false,
-    icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    focusable: true,
+    icon: path.join(process.env.VITE_PUBLIC, 'icon.ico'),
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -58,8 +64,8 @@ function createWindow() {
     frame: false,
     transparent: true,
     alwaysOnTop: true,
-    focusable: false,
-    icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    focusable: true,
+    icon: path.join(process.env.VITE_PUBLIC, 'icon.ico'),
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -78,8 +84,8 @@ function createWindow() {
     frame: false,
     transparent: true,
     alwaysOnTop: true,
-    focusable: false,
-    icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    focusable: true,
+    icon: path.join(process.env.VITE_PUBLIC, 'icon.ico'),
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,

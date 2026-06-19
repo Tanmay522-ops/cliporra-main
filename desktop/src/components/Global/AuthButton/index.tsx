@@ -5,7 +5,7 @@ const AuthButton = () => {
     return (
         <SignedOut>
             <div className="flex gap-x-3  justify-center items-center">
-                <SignInButton>
+                <SignInButton mode="modal">
                     <Button
                         variant="outline"
                         className="px-10 rounded-full hover:bg-gray-200"
@@ -13,7 +13,7 @@ const AuthButton = () => {
                         Sign In
                     </Button>
                 </SignInButton>
-                <SignUpButton>
+                <SignUpButton mode="modal">
                     <Button
                         variant="default"
                         className="px-10 rounded-full"
