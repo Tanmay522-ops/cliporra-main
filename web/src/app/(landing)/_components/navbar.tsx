@@ -1,12 +1,11 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { Download, LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient"
-import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 
 interface NavItem {
@@ -22,27 +21,16 @@ interface NavBarProps {
 
 export default function NavBar({ items, className }: NavBarProps) {
     const [activeTab, setActiveTab] = useState(items[0].name)
-    const [isMobile, setIsMobile] = useState(false)
-    const router = useRouter()
-
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 768)
-        }
-
-        handleResize()
-        window.addEventListener("resize", handleResize)
-        return () => window.removeEventListener("resize", handleResize)
-    }, [])
 
     return (
         <div
             className={cn(
-                "fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-6",
+                "fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50",
+                "w-[calc(100%-1.5rem)] sm:w-auto max-w-fit",
                 className,
             )}
         >
-            <div className="flex items-center gap-3 bg-background/5 border border-border backdrop-blur-lg py-1 px-1 rounded-full shadow-lg">
+            <div className="flex items-center justify-center gap-1 sm:gap-3 bg-background/5 border border-border backdrop-blur-lg py-1 px-1 rounded-full shadow-lg overflow-x-auto">
 
                 {/* Nav Items */}
                 {items.map((item) => {
@@ -55,7 +43,7 @@ export default function NavBar({ items, className }: NavBarProps) {
                             href={item.url}
                             onClick={() => setActiveTab(item.name)}
                             className={cn(
-                                "relative cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors",
+                                "relative cursor-pointer text-sm font-semibold px-3 sm:px-6 py-2 rounded-full transition-colors shrink-0",
                                 "text-foreground/80 hover:text-primary",
                                 isActive && "bg-muted text-primary",
                             )}
@@ -87,27 +75,27 @@ export default function NavBar({ items, className }: NavBarProps) {
                 })}
 
                 {/* Divider */}
-                <div className="w-px h-6 bg-border mx-1" />
+                <div className="w-px h-6 bg-border mx-1 shrink-0" />
 
                 {/* Login Button */}
-                <Link href="/sign-in">
+                <Link href="/sign-in" className="shrink-0">
                     <HoverBorderGradient
                         containerClassName="rounded-full"
                         as="button"
-                        className="bg-black dark:bg-black text-white flex items-center gap-x-2 text-sm px-4 py-1 cursor-pointer"
+                        className="bg-black dark:bg-black text-white flex items-center gap-x-2 text-sm px-3 sm:px-4 py-1 cursor-pointer whitespace-nowrap"
                     >
                         Login
                     </HoverBorderGradient>
                 </Link>
 
-                <Link href="/download">
-                    <Button className="flex items-center gap-2 cursor-pointer">
+                {/* Download Button */}
+                <Link href="/download" className="shrink-0">
+                    <Button className="flex items-center gap-2 cursor-pointer whitespace-nowrap px-3 sm:px-4">
                         <Download className="w-5 h-5" />
-                        Download Cliporra
+                        <span className="hidden sm:inline">Download Cliporra</span>
                     </Button>
                 </Link>
             </div>
-
         </div>
     )
 }
