@@ -1,0 +1,29 @@
+name: Nightly Backup
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # runs daily at midnight UTC
+  workflow_dispatch:        # lets you trigger it manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.name "Tanmay522-ops"
+          git config user.email "tanmayprajapat589@gmail.com"
+
+      - name: Push main to backup branch
+        run: |
+          git checkout -B backup
+          git push origin backup --force
