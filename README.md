@@ -44,11 +44,13 @@ Real-time, **Socket.io**-powered notifications tell you the moment someone opens
 
 **1. Dashboard / Workspace View**
 All recordings, organized by workspace and folder, with AI-generated titles.
-![Dashboard](.web/public/dashboard.PNG)
+
+![Dashboard](web/public/dashboard.png)
 
 **2. Recording Studio**
 The Electron desktop app mid-recording, with screen + webcam capture active.
-![Recording Studio](./public/desktop.PNG)
+
+![Recording Studio](web/public/desktop.png)
 
 **3. Video Playback & Comments**
 Shareable video page with transcript, AI summary, and threaded comments.
