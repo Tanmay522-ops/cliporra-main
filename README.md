@@ -100,6 +100,8 @@ Because every video is transcribed on upload, users can search across the *conte
 
 ## 🔗 Links
 
-- **Live App:** [add link]
-- **Desktop Download:** [add GitHub Releases link]
-- **Demo Video:** [add link]
+[![Live App](https://img.shields.io/badge/🚀_Live_App-blue?style=for-the-badge)](https://cliporra-main-web.vercel.app)
+
+[![Desktop Download](https://img.shields.io/badge/⬇️_Download_Desktop_App-2B2E3A?style=for-the-badge&logo=electron&logoColor=9FEAF9)](https://cliporra-main-web.vercel.app/download)
+
+
