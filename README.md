@@ -59,19 +59,19 @@ Shareable video page with transcript, AI summary, and threaded comments.
 ## 🛠️ Tech Stack
 
 - **Web Framework:** Next.js 15 (App Router)
-- **Desktop App:** Electron, `electron-vite` (dev), `electron-builder` (packaging)
+- **Desktop App:** Electron, `electron-vite` (dev), `electron-package-manager` (packaging)
 - **Backend:** Express.js + Socket.io
 - **Authentication:** Clerk
 - **Database:** PostgreSQL with Prisma ORM
 - **Storage/CDN:** AWS S3 + CloudFront (custom `VideoStreamingPolicy` for `Range`-header video seeking)
-- **AI:** OpenAI (Whisper transcription + GPT summaries), Gemini API
-- **Payments:** Razorpay (UPI-supported subscriptions)
+- **AI:** OpenAI (Whisper transcription + GPT summaries)
+- **Payments:** PayPal (UPI-supported subscriptions)
 - **State Management:** TanStack Query + Redux Toolkit
 - **Styling:** Tailwind CSS & shadcn/ui
 - **Email:** Nodemailer
 - **Deployment:** Vercel (web), Railway (server), GitHub Releases (desktop)
 
-Users on the free tier can record and share within personal workspaces; an active Razorpay subscription unlocks team workspaces, extended cloud storage, and unlimited AI transcriptions.
+Users on the free tier can record and share within personal workspaces; an active PayPal subscription unlocks team workspaces, extended cloud storage, and unlimited AI transcriptions.
 
 ---
 
